@@ -4,9 +4,11 @@ import { useRef, useContext } from 'react'
 
 import { Helmet } from 'react-helmet'
 import Navlist from './NavList'
-import { mixin } from '../styles'
+
 import useOnclickOutside from '../Hooks/useOnClickOutside'
 import { UiContext } from '../store/isActiveContext'
+import link from 'next/link'
+
 // import cv from '../Documents/cv.pdf'
 
 type active = {
@@ -69,7 +71,12 @@ const Hamburger = styled.button<active>`
 `
 
 const Aside = styled.aside<{ isActive: boolean }>`
-  ${mixin.flexCenter}
+  ${({
+    theme: {
+      mixin: { flexCenter },
+    },
+  }) => flexCenter}
+
   position: fixed;
   top: 0;
   bottom: 0;
@@ -77,7 +84,7 @@ const Aside = styled.aside<{ isActive: boolean }>`
   width: min(65vw, 400px);
   padding: 1rem 0;
   transition: all 0.5s ease-in-out;
-  background-color: var( --clr-navy-dark);
+  background-color: var(--clr-navy-dark);
   height: 100vh;
   visibility: ${({ isActive }) => (isActive ? 'visible' : 'hidden')};
 
@@ -85,16 +92,23 @@ const Aside = styled.aside<{ isActive: boolean }>`
     isActive ? 'translateX(0)' : 'translateX(100vh)'};
 
   nav {
-    ${mixin.flexBetween}
+    ${({
+      theme: {
+        mixin: { flexBetween },
+      },
+    }) => flexBetween}
     flex-direction: column;
     text-align: center;
     width: 100%;
-  
   }
 
   ul {
     flex-direction: column;
-    ${mixin.flexBetween}
+    ${({
+      theme: {
+        mixin: { flexBetween },
+      },
+    }) => flexBetween}
 
     list-style: none;
     width: 100%;
@@ -106,7 +120,7 @@ const Aside = styled.aside<{ isActive: boolean }>`
       display: inline-block;
       text-decoration: none;
       font-weight: 600;
-      color: #D1D1D6;
+      color: var(--clr-light);
       transition: 0.4s;
       padding: 0.162rem 1rem 1rem;
       font-size: 0.9rem;
@@ -118,18 +132,18 @@ const Aside = styled.aside<{ isActive: boolean }>`
     }
   }
 
+  a.resume-link {
+    ${({
+      theme: {
+        mixin: { inlineLink },
+      },
+    }) => inlineLink}
 
-
-a.resume-link{
-  ${mixin.inlineLink}
-font-size:   0.74rem;
- padding: .9rem  2.5rem ;
- margin: 10% auto 0;
- width: max-content ;
- 
-}
- 
-
+    font-size:   0.74rem;
+    padding: 0.9rem 2.5rem;
+    margin: 10% auto 0;
+    width: max-content;
+  }
 
   @media ${device.tablet} {
     display: none;
@@ -137,7 +151,7 @@ font-size:   0.74rem;
 `
 
 const Menu = () => {
-  const { isActive,  toggleIsActive, setManuIsActive } = useContext(UiContext)
+  const { isActive, toggleIsActive, setManuIsActive } = useContext(UiContext)
   const menuRef = useRef<HTMLDivElement>(null)
   useOnclickOutside(menuRef, () => setManuIsActive(false))
 
@@ -158,7 +172,7 @@ const Menu = () => {
           <Navlist />
 
           <a
-            href=""
+            href="/resume/cv.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="resume-link"

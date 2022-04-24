@@ -1,7 +1,6 @@
 // import styled from 'styled-components'
 import { device } from './Breakpoint.style'
 import styled, { StyledFunction } from 'styled-components'
-import { mixin } from '../styles'
 
 export const Header = styled.header`
   position: fixed;
@@ -9,15 +8,31 @@ export const Header = styled.header`
   left: 0;
   right: 0;
   z-index: 11;
-  background-color: var(--clr-dark);
+
+  background-color: var(--clr-navy-dark);
   padding: 0 2.488rem;
-  ${mixin.flexBetween}
+  ${({
+    theme: {
+      mixin: { flexBetween },
+    },
+  }) => flexBetween}
   height: 5rem;
-  /* backdrop-filter: blur(30rem); */
-  width: 100%;
+  max-width: 100%;
+
+  border: 0.279rem solid;
+  border-image-source: linear-gradient(
+    90deg,
+    var(--clr-navy),
+    var(--clr-purple) 70%
+  );
+  border-image-slice: 1;
+
+  border-bottom: none;
+
+  @media ${device.laptop} {
+    padding: 0 3.488rem;
+  }
 `
-
-
 
 // export const Hamburger = styled.button<active>`
 //   display: block;
@@ -69,7 +84,11 @@ export const Header = styled.header`
 // `
 
 export const StyleLogo = styled.div`
-  ${mixin.flexBetween}
+  ${({
+    theme: {
+      mixin: { flexBetween },
+    },
+  }) => flexBetween}
   a {
     display: inline-block;
     font-size: 1.2rem;
@@ -77,7 +96,6 @@ export const StyleLogo = styled.div`
     text-align: center;
     color: var(--clr-purple-light);
     font-weight: bold;
-    
   }
 
   div {
@@ -89,5 +107,3 @@ export const StyleLogo = styled.div`
     }
   }
 `
-
-

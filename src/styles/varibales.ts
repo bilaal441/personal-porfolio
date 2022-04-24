@@ -7,11 +7,16 @@ const variables = css`
     --clr-purple-light: #dabfff;
     --clr-dark: #1c1c33;
     --clr-sky-blue: #7fdeff;
-    /* --clr-sky-blue: #72c7e5; */
+
     --clr-white: #fff;
+    --clr-light: #d1d1d6;
     --clr-navy-dark: #161628;
-    --fontStack: 'Roboto', sans-serif;
-    --clr-light-sky-blue:  #A5E7FF;
+    --fontStack: 'Open Sans', sans-serif;
+    --clr-light-sky-blue: #a5e7ff;
+
+    --clr-dark-text: #a4a4ad;
+
+    --big-max-width: clamp(50rem, 55rem, 60rem);
   }
 `
 

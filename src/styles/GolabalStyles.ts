@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import variables from './varibales'
+import { device } from './Breakpoint.style'
 
 // 2.488rem/49.77px	A Visual Type Scale
 // 2.074rem/41.47px	A Visual Type Scale
@@ -33,10 +34,53 @@ ${variables}
    font-size: 125%;
 
 
-   scroll-behavior: smooth;
-   height: 100%;
+
    
+
+   scroll-behavior: smooth;
+     max-width: 100%;
+   border: 0.279rem  solid;
+    border-image-source: linear-gradient(90deg, var(--clr-navy), var( --clr-purple) 70%);
+    border-image-slice: 1;
+    
+    background-color: var(--clr-navy-dark);
+    /* z-index: 100; */
+
+
+    scrollbar-width: thin;
+    scrollbar-color:  var(--clr-dark-text)  var(--clr-navy);
+   
+
+    
   }
+
+
+
+
+
+
+
+  body::-webkit-scrollbar {
+    width: 12px;
+  }
+  body::-webkit-scrollbar-track {
+    background: var(--clr-navy);
+    
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--clr-navy-dark);
+    border: 3px solid var(--clr-navy);
+    border-radius: 10px;
+    
+  }
+
+
+
+
+
+
+
+
   *, *:before, *:after {
    box-sizing: inherit;
    margin: 0 ;
@@ -46,13 +90,22 @@ ${variables}
    body, #__next {
     height: 100%;
   }
+
+
+
+
+
  
   body {
     font-family: var(--fontStack) ;
     line-height:  1.3; 
-    background-color: var(--clr-dark);
+    background-color: var(--clr-navy-dark);
     margin: 0;
-    color: var( --clr-white) ;
+      color: var(--clr-dark-text);;
+
+      min-height: 100%;
+
+      overflow-x: hidden;
 
 
   }
@@ -61,10 +114,28 @@ img{
   width: 100%;
 }
 
+section {
+    margin: 0 auto;
+    
+    max-width: 1000px;
+    padding: 60px 0;
+
+    @media ${device.tablet} {
+      padding: 80px 0;
+  }
+
+  @media ${device.laptop} {
+padding: 100px 0;
+
+  }
+  
+  }
+
 
 
 button{
 border: none;
+outline: none;
 }
 
 
@@ -79,9 +150,14 @@ ul{
 
 
 
+.section-l-r{
+  padding-left: 50px;
+  padding-right: 50px;
+}
 
-
-
+.global-class-name{
+  vertical-align: middle;
+}
 
 `
 
