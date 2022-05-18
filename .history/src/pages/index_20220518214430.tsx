@@ -10,7 +10,7 @@ import {
   createHttpLink,
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-import HeroSection from '../components/sections/Herogi'
+import HeroSection from '../components/'
 import AboutSection from '../components/sections/About'
 import Project from '../components/sections/Project'
 import { repoData } from '../../interface/index'

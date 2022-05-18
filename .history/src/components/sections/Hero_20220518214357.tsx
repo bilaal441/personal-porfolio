@@ -100,7 +100,7 @@ const StyledIntro = styled.div`
   }
 `
 
-const Hero = () => {
+const Hero = ({ children }: Props) => {
   return (
     <StyleHero>
       <StyleImageContainer>
