@@ -119,11 +119,11 @@ const Hero = ({ children }: Props) => {
         </div>
       </StyleImageContainer>
       <StyledIntro>
-        <h1>hi, I&#39;m Bilal Sharif,</h1>
+        <h1>hi, Im Bilal Sharif,</h1>
 
         <h3 className="big-heading">frontend develover.</h3>
 
-        <p className="big-text">
+        <p className='big-text'>
           Exploring opportunities and side projects. currently working at royal
           college of surgions.
         </p>
