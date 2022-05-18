@@ -2,37 +2,7 @@
 import { device } from './Breakpoint.style'
 import styled, { StyledFunction } from 'styled-components'
 
-export const Header = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 11;
 
-  background-color: var(--clr-navy-dark);
-  padding: 0 2.488rem;
-  ${({
-    theme: {
-      mixin: { flexBetween },
-    },
-  }) => flexBetween}
-  height: 5rem;
-  max-width: 100%;
-
-  border: 0.279rem solid;
-  border-image-source: linear-gradient(
-    90deg,
-    var(--clr-navy),
-    var(--clr-purple) 70%
-  );
-  border-image-slice: 1;
-
-  border-bottom: none;
-
-  @media ${device.laptop} {
-    padding: 0 3.488rem;
-  }
-`
 
 // export const Hamburger = styled.button<active>`
 //   display: block;

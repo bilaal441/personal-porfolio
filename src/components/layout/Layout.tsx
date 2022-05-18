@@ -55,7 +55,9 @@ const Layout = ({ children }: Props) => {
 
         <MainNavigation />
 
-        <StayledMain className="fillHeight">{children}</StayledMain>
+        <div id="content">
+          <StayledMain className="fillHeight">{children}</StayledMain>
+        </div>
       </StyleLayout>
     </ThemeProvider>
   )

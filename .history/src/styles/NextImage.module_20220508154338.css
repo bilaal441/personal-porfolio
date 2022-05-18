@@ -1,0 +1,13 @@
+.ç {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}
+
+.unset {
+  width: 100%;
+}
+.unset > div {
+  position: unset !important;
+}

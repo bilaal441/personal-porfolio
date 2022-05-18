@@ -1,0 +1,168 @@
+import Link from 'next/link'
+
+import { RiGithubLine } from 'react-icons/ri'
+import { FiExternalLink } from 'react-icons/fi'
+import CustomImage from '../CustomImage'
+import styled from 'styled-components'
+import { device } from '../../styles/Breakpoint.style'
+import { Z_ASCII } from 'zlib'
+
+type props = {
+  name: string
+  description: string
+  homepageUrl: string
+  imageUrl: string
+  text: string
+  topics: []
+  url: string
+  id: string
+  index: number
+}
+
+const StyedCard = styled.div`
+  border: 1px solid var(--clr-navy);
+  border-radius: 0.5rem 0.5rem;
+
+  box-shadow: rgba(68, 68, 110, 0.2) 0px 8px 24px;
+
+  @media ${device.tablet} {
+    border: none;
+    border-radius: none;
+    &.repo-1 {
+      margin-top: -50%;
+    }
+  }
+`
+const StyedList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.833rem;
+  font-size: 0.7rem;
+  text-transform: capitalize;
+
+  li {
+    margin: 0rem 0.579rem 0.279rem 0rem;
+    color: var(--clr-purple-light);
+  }
+`
+
+const StyledIntro = styled.div`
+  ${({
+    theme: {
+      mixin: { flexBetween },
+    },
+  }) => flexBetween}
+
+  .repo-links a {
+    display: inline-block;
+    margin-right: 0.5rem;
+    svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+`
+
+const StyleLinkImage = styled.a`
+  width: 100%;
+  height: 100%;
+  background-color: var(--clr-sky-blue);
+  border-radius: var(--border-radiusCard);
+  vertical-align: middle;
+  &:hover,
+  &:focus {
+    background: transparent;
+    outline: 0;
+    &:before,
+    .unset-img {
+      background: transparent;
+      filter: none;
+    }
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    transition: all 0.25s;
+    background-color: var(--clr-navy);
+    mix-blend-mode: screen;
+  }
+`
+const StyledContentText = styled.div`
+  padding: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.833rem;
+  padding-inline-end: 0.6rem;
+  padding-inline-start: 0.6rem;
+`
+
+const Card = ({
+  id,
+  name,
+  description,
+  homepageUrl,
+  imageUrl,
+  text,
+  topics,
+  url,
+  index,
+}: props) => {
+  return (
+    <StyedCard className={`repo-${index}`}>
+      <div style={{ position: 'relative' position: relative;
+    z-index: 1; }}>
+        <Link href={homepageUrl} passHref>
+          <StyleLinkImage target="_blank">
+            <CustomImage
+              src={imageUrl}
+              alt={name}
+              layouttype={'fill'}
+              width="100%"
+              objectFit="contain"
+            />
+          </StyleLinkImage>
+        </Link>
+      </div>
+
+      <StyledContentText>
+        <StyledIntro>
+          <h3 className="subsection-heading"> {name.replaceAll('-', ' ')} </h3>
+
+          <div className="repo-links">
+            <Link href={url} passHref>
+              <a target="_blank">
+                <RiGithubLine />
+              </a>
+            </Link>
+
+            <Link href={homepageUrl} passHref>
+              <a target="_blank">
+                <FiExternalLink title="github" />
+              </a>
+            </Link>
+          </div>
+        </StyledIntro>
+
+        <div className="repo-description">
+          <p> {description}</p>
+        </div>
+
+        <StyedList>
+          {topics.map((topic) => (
+            <li key={id}>{topic}</li>
+          ))}
+        </StyedList>
+      </StyledContentText>
+    </StyedCard>
+  )
+}
+
+export default Card
