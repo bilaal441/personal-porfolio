@@ -24,11 +24,11 @@ type props = {
 }
 const Home: NextPage<props> = ({ feature, about }) => {
   return (
-    <Fragment>
+    <React.Fragment>
       <HeroSection />
       <AboutSection bio={about.bio} skilss={about.skilss} />
       <Project items={feature} />
-    </Fragment>
+    </React.Fragment>
   )
 }
 

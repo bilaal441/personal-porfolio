@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { UiContext } from '../store/isActiveContext'
 import { GetStaticProps } from 'next'
-import { ReactNode, Fragment } from 'react'
+import { ReactNode , Fragment } from 'react'
 import {
   ApolloClient,
   InMemoryCache,
@@ -15,6 +15,7 @@ import AboutSection from '../components/sections/About'
 import Project from '../components/sections/Project'
 import { repoData } from '../../interface/index'
 
+
 type props = {
   feature: []
   about: {
@@ -24,11 +25,11 @@ type props = {
 }
 const Home: NextPage<props> = ({ feature, about }) => {
   return (
-    <Fragment>
+    <React.Fragment>
       <HeroSection />
       <AboutSection bio={about.bio} skilss={about.skilss} />
       <Project items={feature} />
-    </Fragment>
+    </React.Fragment>
   )
 }
 

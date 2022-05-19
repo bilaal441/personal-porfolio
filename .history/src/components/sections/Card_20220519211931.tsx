@@ -6,6 +6,7 @@ import CustomImage from '../CustomImage'
 import styled from 'styled-components'
 import { device } from '../../styles/Breakpoint.style'
 
+
 type props = {
   name: string
   description: string
