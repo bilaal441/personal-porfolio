@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-
+import { UiContext } from '../store/isA?ctiveContext'
 import { GetStaticProps } from 'next'
 import { Fragment } from 'react'
 import {

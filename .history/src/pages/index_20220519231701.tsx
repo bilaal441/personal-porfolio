@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-
+import { UiContext } from '../store/isActiveContext'
 import { GetStaticProps } from 'next'
-import { Fragment } from 'react'
+import {  Fragment } from 'react'
 import {
   ApolloClient,
   InMemoryCache,
