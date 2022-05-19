@@ -14,7 +14,7 @@ import HeroSection from '../components/sections/Hero'
 import AboutSection from '../components/sections/About'
 import Project from '../components/sections/Project'
 import { repoData } from '../../interface/index'
-import React from 'react'
+import {React} from 'react'
 
 type props = {
   feature: []

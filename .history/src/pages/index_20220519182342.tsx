@@ -14,7 +14,7 @@ import HeroSection from '../components/sections/Hero'
 import AboutSection from '../components/sections/About'
 import Project from '../components/sections/Project'
 import { repoData } from '../../interface/index'
-import React from 'react'
+import {Reac}
 
 type props = {
   feature: []
@@ -25,11 +25,11 @@ type props = {
 }
 const Home: NextPage<props> = ({ feature, about }) => {
   return (
-    <React.Fragment>
+    <ReactFragment>
       <HeroSection />
       <AboutSection bio={about.bio} skilss={about.skilss} />
       <Project items={feature} />
-    </React.Fragment>
+    </ReactFragment>
   )
 }
 
