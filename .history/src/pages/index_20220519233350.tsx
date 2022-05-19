@@ -31,7 +31,7 @@ const Home: NextPage<props> = ({ feature, about }) => {
     </Fragment>
   )
 }
-export default Home
+export de
 
 export const getStaticProps = async () => {
   const httpLink = createHttpLink({
