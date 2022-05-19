@@ -19,6 +19,7 @@ import {
   ScrollDirections,
 } from '../Hooks/ useScrollDirection '
 
+
 const Header = styled.header<scrolltDirections>`
   display: flex;
   justify-content: space-between;
@@ -140,12 +141,12 @@ const DeskTopNavigation = styled.div`
       padding: 0.6rem 0.8rem;
       line-height: 1.1;
       margin-left: 1rem;
-      object-fit: m;
+      object-fit: m
     }
   }
 `
 
-const MainNavigation = () => {
+const MainNavigation = ({ children }: Props) => {
   const [showHeader, setShowHearder] = useState(true)
   // const [lastscrollY, setlastscrollY] = useState(0)
   const direction = useScrollDirection()

@@ -145,7 +145,7 @@ const DeskTopNavigation = styled.div`
   }
 `
 
-const MainNavigation = () => {
+const MainNavigation = ({ children }: Props) => {
   const [showHeader, setShowHearder] = useState(true)
   // const [lastscrollY, setlastscrollY] = useState(0)
   const direction = useScrollDirection()
