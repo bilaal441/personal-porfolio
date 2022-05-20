@@ -33,7 +33,7 @@ const Home: NextPage<props> = ({ feature, about }) => {
 }
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+export const  getStaticProps: getStaticProps = async () => {
   const httpLink = createHttpLink({
     uri: 'https://api.github.com/graphql',
   })
