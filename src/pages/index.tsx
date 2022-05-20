@@ -1,7 +1,7 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetStaticProps } from 'next'
 import Head from 'next/head'
 
-import { GetStaticProps } from 'next'
+
 import { Fragment } from 'react'
 import {
   ApolloClient,
