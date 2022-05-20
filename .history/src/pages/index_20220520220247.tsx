@@ -22,7 +22,7 @@ type props = {
     skilss: object[]
   }
 }
-const home: NextPage<props> = ({ feature, about }) => {
+const Home: NextPage<props> = ({ feature, about }) => {
   return (
     <Fragment>
       <HeroSection />
@@ -31,6 +31,7 @@ const home: NextPage<props> = ({ feature, about }) => {
     </Fragment>
   )
 }
+
 
 export const getStaticProps: GetStaticProps = async () => {
   const httpLink = createHttpLink({
@@ -133,4 +134,6 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default home
+export default Home
+withStaticProps
+WithStaticProps
