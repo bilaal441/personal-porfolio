@@ -122,7 +122,7 @@ const Project = ({ items }: props) => {
           </Link>
         </StyledIndtro>
 
-        {items ? (
+        {items &&
           items?.map(
             (
               {
@@ -150,10 +150,7 @@ const Project = ({ items }: props) => {
                 index={i}
               />
             ),
-          )
-        ) : (
-          <div>error has accured</div>
-        )}
+          )}
       </StyledGridConatiner>
     </StyleProjectSection>
   )
