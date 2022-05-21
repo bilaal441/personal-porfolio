@@ -106,16 +106,19 @@ const AboutSection = ({ bio, skilss }: props) => {
 
       <div className="about-inner">
         <StyledAboutText>
-          {bio &&
+          {bio ? (
             bio.map((cur: { text?: string }, index) => (
               <p key={index}>{cur.text} </p>
-            ))}
+            ))
+          ) : (
+            <div>error</div>
+          )}
         </StyledAboutText>
 
         <StyledStack>
           <h3 className="subsection-heading"> technologies I’ve work with.</h3>
           <div className="charts-container">
-            {skilss &&
+            {skilss ? (
               skilss.map((skill: { name?: any }, index) => {
                 const value: keyof typeof iconObject = skill?.name
                   ?.replaceAll('-', '')
@@ -136,7 +139,10 @@ const AboutSection = ({ bio, skilss }: props) => {
                     </footer>
                   </div>
                 )
-              })}
+              })
+            ) : (
+              <div> error</div>
+            )}
           </div>
         </StyledStack>
       </div>

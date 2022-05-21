@@ -172,9 +172,11 @@ const Card = ({
         </div>
 
         <StyedList>
-          {topics.map((topic) => (
-            <li key={topic}>{topic}</li>
-          ))}
+          {topics ? (
+            topics.map((topic) => <li key={topic}>{topic}</li>)
+          ) : (
+            <li>error accured</li>
+          )}
         </StyedList>
       </StyledContentText>
     </StyedCard>
