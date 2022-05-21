@@ -9,7 +9,6 @@ import {
   SiJavascript as JavaScript,
   SiTypescript as Typescript,
 } from 'react-icons/si'
-import { IconType } from 'react-icons'
 
 const iconObject = {
   ReactJs,
@@ -121,7 +120,7 @@ const AboutSection = ({ bio, skilss }: props) => {
                 const value: keyof typeof iconObject = skill?.name
                   ?.replaceAll('-', '')
                   .trim()
-                console.log(value)
+
                 const Icon = GetIcon(value)
                 return (
                   <div key={index} className="chart">

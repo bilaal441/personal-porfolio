@@ -26,8 +26,8 @@ const home: NextPage<props> = ({ feature, about }) => {
   return (
     <Fragment>
       <HeroSection />
-      <AboutSection bio={about.bio} skilss={about.skilss} />
-      <Project items={feature} />
+      {/* <AboutSection bio={about.bio} skilss={about.skilss} />
+      <Project items={feature} /> */}
     </Fragment>
   )
 }
