@@ -1,18 +1,18 @@
-import type { NextPage, GetStaticProps } from 'next'
-import Head from 'next/head'
+import type { NextPage, GetStaticProps } from "next"
+import Head from "next/head"
 
-import { Fragment } from 'react'
+import { Fragment } from "react"
 import {
   ApolloClient,
   InMemoryCache,
   gql,
   createHttpLink,
-} from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
-import HeroSection from '../components/sections/Hero'
-import AboutSection from '../components/sections/About'
-import Project from '../components/sections/Project'
-import { repoData } from '../../interface/index'
+} from "@apollo/client"
+import { setContext } from "@apollo/client/link/context"
+import HeroSection from "../components/sections/Hero"
+import AboutSection from "../components/sections/About"
+import Project from "../components/sections/Project"
+import { repoData } from "../../interface/index"
 
 type props = {
   // feature: [],
@@ -33,7 +33,7 @@ const home: NextPage<props> = ({ about }: props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const httpLink = createHttpLink({
-    uri: 'https://api.github.com/graphql',
+    uri: "https://api.github.com/graphql",
   })
 
   const authLink = setContext((_, { headers }) => {
@@ -91,8 +91,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const pinnableItems = user?.pinnableItems?.nodes?.flat()
 
   const items = pinnableItems
-    .filter(({ homepageUrl }: { homepageUrl: '' }) =>
-      homepageUrl?.includes('netlify.app'),
+    .filter(({ homepageUrl }: { homepageUrl: "" }) =>
+      homepageUrl?.includes("netlify.app"),
     )
     .map(
       ({
