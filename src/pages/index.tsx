@@ -9,7 +9,8 @@ import Project from "../components/sections/Project"
 import { repoData } from "../../interface/index"
 import client from "../../apollo-client"
 import { gql } from "@apollo/client"
-;(" ")
+import Contact from "../components/sections/Contact"
+
 type props = {
   feature: []
   about: {
@@ -20,9 +21,41 @@ type props = {
 const home: NextPage<props> = ({ feature, about }: props) => {
   return (
     <Fragment>
+      <Head>
+        <title>Bilal - front-end developer</title>
+        <meta name="title" content="Bilal - front-end developer" />
+        <meta name="keywords" content="bilal , Bilal website" />
+        <meta
+          name="description"
+          content="front end devoloper have passion for creating dynimic page, lives london  uk  "
+        />
+
+        <meta property="og:type" content="website" />
+        {/* <meta property="og:url" content="https://abdulrahman.id" /> */}
+        <meta property="og:title" content="Bilal - front-end developer" />
+        <meta
+          property="og:description"
+          content="front end devoloper have passion for creating dynimic page, lives london  uk"
+        />
+        <meta property="og:image" content="https://i.imgur.com/AOMvmeJ.png" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        {/* <meta property="twitter:url" content="https://abdulrahman.id/" /> */}
+        <meta property="twitter:title" content="Bilal - front-end developer" />
+        <meta
+          property="twitter:description"
+          content="front end devoloper have passion for creating dynimic page, lives london  uk"
+        />
+        <meta
+          property="twitter:image"
+          // content="https://i.imgur.com/AOMvmeJ.png"
+        />
+      </Head>
+
       <HeroSection />
       <AboutSection bio={about.bio} skilss={about.skilss} />
       <Project items={feature} />
+      <Contact />
     </Fragment>
   )
 }

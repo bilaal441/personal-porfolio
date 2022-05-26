@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import { device } from '../../styles/Breakpoint.style'
-import { IoIosContact } from 'react-icons/io'
+import styled from "styled-components"
+import { device } from "../../styles/Breakpoint.style"
+import { IoIosContact } from "react-icons/io"
 
 import {
   SiNextdotjs as NextJs,
@@ -8,7 +8,7 @@ import {
   SiReact as ReactJs,
   SiJavascript as JavaScript,
   SiTypescript as Typescript,
-} from 'react-icons/si'
+} from "react-icons/si"
 
 const iconObject = {
   ReactJs,
@@ -119,9 +119,9 @@ const AboutSection = ({ bio, skilss }: props) => {
           <h3 className="subsection-heading"> technologies I’ve work with.</h3>
           <div className="charts-container">
             {skilss ? (
-              skilss.map((skill: { name?: any }, index) => {
+              skilss.map((skill: { name?: any; progress?: string }, index) => {
                 const value: keyof typeof iconObject = skill?.name
-                  ?.replaceAll('-', '')
+                  ?.replaceAll("-", "")
                   .trim()
 
                 const Icon = GetIcon(value)
@@ -133,7 +133,7 @@ const AboutSection = ({ bio, skilss }: props) => {
                     </span>
                     <footer>
                       <div
-                        style={{ height: '100%' }}
+                        style={{ height: "100%", width: `${skill.progress}` }}
                         className="js fill-color"
                       ></div>
                     </footer>

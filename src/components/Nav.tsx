@@ -1,23 +1,23 @@
-import Link from 'next/link'
-import Image from 'next/image'
+import Link from "next/link"
+import Image from "next/image"
 
-import { StyleLogo } from '../styles/styledHeader'
-import Logo from '../../imgs/logo.png'
+import { StyleLogo } from "../styles/styledHeader"
+import Logo from "../../imgs/logo.png"
 
-import React, { useState, ReactNode, useEffect, useCallback } from 'react'
-import NavList from './NavList'
-import Menu from './Menu'
-import styled from 'styled-components'
-import { scrolltDirections } from '../../interface'
-import { css } from 'styled-components'
+import React, { useState, ReactNode, useEffect, useCallback } from "react"
+import NavList from "./NavList"
+import Menu from "./Menu"
+import styled from "styled-components"
+import { scrolltDirections } from "../../interface"
+import { css } from "styled-components"
 
-import usePrefersReducedMotion from '../Hooks/ usePrefersReducedMotion'
+import usePrefersReducedMotion from "../Hooks/ usePrefersReducedMotion"
 
-import { device, desktopApp } from '../styles/Breakpoint.style'
+import { device, desktopApp } from "../styles/Breakpoint.style"
 import {
   useScrollDirection,
   ScrollDirections,
-} from '../Hooks/ useScrollDirection '
+} from "../Hooks/ useScrollDirection "
 
 const Header = styled.header<scrolltDirections>`
   display: flex;
@@ -37,7 +37,7 @@ const Header = styled.header<scrolltDirections>`
   @media screen and (prefers-reduced-motion: no-preference) {
     ${({ toggleHeader, direction }) =>
       !toggleHeader &&
-      direction === 'up' &&
+      direction === "up" &&
       css`
         height: var(--nav-height);
         box-shadow: 0 0.5rem 1.5rem -0.5rem rgba(22, 22, 40, 0.85);
@@ -51,7 +51,7 @@ const Header = styled.header<scrolltDirections>`
 
     ${({ toggleHeader, direction }) =>
       !toggleHeader &&
-      direction === 'down' &&
+      direction === "down" &&
       css`
         height: var(--nav-height);
         transition: all 0.25s ease-in-out cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -127,6 +127,10 @@ const DeskTopNavigation = styled.div`
           color: var(--clr-sky-blue);
         }
       }
+
+      span.active {
+        color: var(--clr-sky-blue);
+      }
     }
 
     a.resume-link {
@@ -152,20 +156,20 @@ const MainNavigation = () => {
   const prefersReducedMotion = usePrefersReducedMotion()
 
   const scrollHandler = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       setShowHearder(window.pageYOffset < 50)
     }
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       if (prefersReducedMotion) {
         return
       }
 
-      window.addEventListener('scroll', scrollHandler)
+      window.addEventListener("scroll", scrollHandler)
 
-      return () => window.removeEventListener('scroll', scrollHandler)
+      return () => window.removeEventListener("scroll", scrollHandler)
     }
   })
   return (

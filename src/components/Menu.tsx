@@ -1,13 +1,13 @@
-import styled from 'styled-components'
-import { device } from '../styles/Breakpoint.style'
-import { useRef, useContext, useEffect } from 'react'
+import styled from "styled-components"
+import { device } from "../styles/Breakpoint.style"
+import { useRef, useContext, useEffect } from "react"
 
-import { Helmet } from 'react-helmet'
-import Navlist from './NavList'
+import { Helmet } from "react-helmet"
+import Navlist from "./NavList"
 
-import useOnclickOutside from '../Hooks/useOnClickOutside'
-import { UiContext } from '../store/isActiveContext'
-import link from 'next/link'
+import useOnclickOutside from "../Hooks/useOnClickOutside"
+import { UiContext } from "../store/isActiveContext"
+import link from "next/link"
 
 // import cv from '../Documents/cv.pdf'
 
@@ -50,13 +50,13 @@ const Hamburger = styled.button<active>`
     }
 
     &:nth-child(2) {
-      opacity: ${(props) => props.isActive && '0'};
-      transform: ${(props) => props.isActive && 'translateX(15px)'};
+      opacity: ${(props) => props.isActive && "0"};
+      transform: ${(props) => props.isActive && "translateX(15px)"};
     }
 
     &:nth-child(1) {
       transform: ${(props) =>
-        props.isActive && 'translate(0px, -2px) rotate(45deg)'};
+        props.isActive && "translate(0px, -2px) rotate(45deg)"};
     }
   }
 
@@ -86,10 +86,10 @@ const Aside = styled.aside<{ isActive: boolean }>`
   transition: all 0.5s ease-in-out;
   background-color: var(--clr-navy-dark);
   height: 100vh;
-  visibility: ${({ isActive }) => (isActive ? 'visible' : 'hidden')};
+  visibility: ${({ isActive }) => (isActive ? "visible" : "hidden")};
 
   transform: ${({ isActive }) =>
-    isActive ? 'translateX(0)' : 'translateX(100vh)'};
+    isActive ? "translateX(0)" : "translateX(100vh)"};
 
   nav {
     ${({
@@ -172,15 +172,15 @@ const Menu = () => {
   }
 
   useEffect(() => {
-    window.addEventListener('resize', onResizeHandler)
+    window.addEventListener("resize", onResizeHandler)
     return () => {
-      window.removeEventListener('resize', onResizeHandler)
+      window.removeEventListener("resize", onResizeHandler)
     }
   })
   return (
     <MenuContainer ref={menuRef}>
       <Helmet>
-        <body className={isActive ? 'blur' : ''} />
+        <body className={isActive ? "blur" : ""} />
       </Helmet>
 
       <Hamburger isActive={isActive} onClick={toggleIsActive}>

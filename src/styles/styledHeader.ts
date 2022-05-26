@@ -1,57 +1,6 @@
 // import styled from 'styled-components'
-import { device } from './Breakpoint.style'
-import styled, { StyledFunction } from 'styled-components'
-
-
-
-// export const Hamburger = styled.button<active>`
-//   display: block;
-//   position: relative;
-//   z-index: 1;
-//   user-select: none;
-//   appearance: none;
-//   outline: none;
-//   background: none;
-//   cursor: pointer;
-//   border: none;
-
-//   span {
-//     display: block;
-//     width: 33px;
-//     height: 4px;
-//     margin-bottom: 5px;
-//     position: relative;
-//     background-color: var(--clr-sky-blue);
-//     border-radius: 6px;
-//     z-index: 1;
-//     transform-origin: 0 0;
-//     transition: 0.4s;
-
-//     &:nth-child(3) {
-//       transform: ${(props) =>
-//         props.IsActive && ` translate(-3px, 3px) rotate(-45deg)`};
-//     }
-
-//     &:nth-child(2) {
-//       opacity: ${(props) => props.IsActive && '0'};
-//       transform: ${(props) => props.IsActive && 'translateX(15px)'};
-//     }
-
-//     &:nth-child(1) {
-//       transform: ${(props) =>
-//         props.IsActive && 'translate(0px, -2px) rotate(45deg)'};
-//     }
-//   }
-
-//   &:hover span:nth-child(2) {
-//     transform: translateX(10px);
-//     background-color: var(--clr-purple);
-//   }
-
-//   @media ${device.tablet} {
-//     display: none;
-//   }
-// `
+import { device } from "./Breakpoint.style"
+import styled, { StyledFunction } from "styled-components"
 
 export const StyleLogo = styled.div`
   ${({

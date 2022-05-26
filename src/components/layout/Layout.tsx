@@ -1,12 +1,13 @@
-import React, { ReactNode } from 'react'
-import MainNavigation from '../Nav'
-import { GlobalStyle, theme } from '../../styles/index'
+import React, { ReactNode } from "react"
+import MainNavigation from "../Nav"
+import { GlobalStyle, theme } from "../../styles/index"
+import Footer from "../sections/Footer"
 import styled, {
   FlattenSimpleInterpolation,
   ThemeProvider,
-} from 'styled-components'
-import { device } from '../../styles/Breakpoint.style'
-import mixin from '../../styles/mixin'
+} from "styled-components"
+import { device } from "../../styles/Breakpoint.style"
+import mixin from "../../styles/mixin"
 type Props = {
   children: ReactNode
 }
@@ -57,6 +58,7 @@ const Layout = ({ children }: Props) => {
 
         <div id="content">
           <StayledMain className="fillHeight">{children}</StayledMain>
+          <Footer />
         </div>
       </StyleLayout>
     </ThemeProvider>

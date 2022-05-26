@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
-import variables from './varibales'
-import { device } from './Breakpoint.style'
+import { createGlobalStyle } from "styled-components"
+import variables from "./varibales"
+import { device } from "./Breakpoint.style"
 
 // 2.488rem/49.77px	A Visual Type Scale
 // 2.074rem/41.47px	A Visual Type Scale
@@ -170,6 +170,8 @@ a{
   cursor: pointer;
   display: inline-block;
   transition: var( --transition) ;
+
+  
 }
 ul{
   list-style:  none;
@@ -215,6 +217,8 @@ align-self: center;
 .global-class-name{
   vertical-align: middle;
 }
+
+
 
 `
 
