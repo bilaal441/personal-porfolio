@@ -20,10 +20,10 @@ const NavList = ({ path, activeColor }: props) => {
   const navigateHandler = () => setManuIsActive(false)
 
   const ScrollHandler = (e: React.MouseEvent) => {
+    e.preventDefault()
     const target = e!.currentTarget!.getAttribute("href")!.replace("/", "")
 
     if (!target) return
-    console.log(target)
 
     const location = document!.querySelector(target) as HTMLElement | null
     if (location !== null)
