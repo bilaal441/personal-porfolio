@@ -4,7 +4,13 @@ import Image from "next/image"
 import { StyleLogo } from "../styles/styledHeader"
 import Logo from "../../imgs/logo.png"
 
-import React, { useState, ReactNode, useEffect, useCallback } from "react"
+import React, {
+  useState,
+  ReactNode,
+  useEffect,
+  useCallback,
+  useRef,
+} from "react"
 import NavList from "./NavList"
 import Menu from "./Menu"
 import styled from "styled-components"
@@ -163,6 +169,9 @@ const MainNavigation = () => {
   const { asPath } = router
   const { navLinks, colors } = configData
 
+  const hearderRef = useRef<HTMLHeadingElement>(null)
+
+  // console.log(hearderRef)
   const scrollHandler = () => {
     if (typeof window !== "undefined") {
       setShowHearder(window.pageYOffset < 50)
@@ -176,13 +185,27 @@ const MainNavigation = () => {
       }
       setActive(colors.skyBlue)
 
+      // const headerObserverCallBack = (entries: object[]) => {
+      //   const entry = entries[0]
+
+      //   console.log(entry)
+      // }
+
+      // const headerObserver = new IntersectionObserver(headerObserverCallBack, {
+      //   root: null,
+      //   threshold: 0,
+      //   rootMargin: `-${100}px`,
+      // })
+
+      // headerObserver.observe(hearderRef.current!)
+
       window.addEventListener("scroll", scrollHandler)
 
       return () => window.removeEventListener("scroll", scrollHandler)
     }
   }, [colors.skyBlue, prefersReducedMotion])
   return (
-    <Header toggleHeader={showHeader} direction={direction}>
+    <Header ref={hearderRef} toggleHeader={showHeader} direction={direction}>
       <StyledNav>
         <StyleLogo>
           <Link href="/" passHref>
