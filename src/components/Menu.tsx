@@ -191,7 +191,7 @@ const Menu = () => {
 
       <Aside isActive={isActive}>
         <nav>
-          <Navlist />
+          <Navlist path={""} activeColor={""} />
 
           <a
             href="/resume/cv.pdf"

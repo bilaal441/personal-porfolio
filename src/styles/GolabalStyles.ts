@@ -138,15 +138,16 @@ img{
 section {
     margin: 0 auto;
     
-    max-width: 1000px;
-    padding: 60px 0;
+    max-width: 50rem;
+    padding: 3rem 0;
+    
 
     @media ${device.tablet} {
-      padding: 80px 0;
+      padding: 4rem 0;
   }
 
   @media ${device.laptop} {
-padding: 100px 0;
+   padding: 5rem 0;
 
   }
   
@@ -217,6 +218,7 @@ align-self: center;
 .global-class-name{
   vertical-align: middle;
 }
+
 
 
 

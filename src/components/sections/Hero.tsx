@@ -1,10 +1,10 @@
-import { ReactNode } from 'react'
-import styled from 'styled-components'
-import Image from 'next/image'
-import HeroImage from '../../icons/me.svg'
+import { ReactNode } from "react"
+import styled from "styled-components"
+import Image from "next/image"
+import HeroImage from "../../icons/me.svg"
 
-import { device } from '../../styles/Breakpoint.style'
-import Link from 'next/link'
+import { device } from "../../styles/Breakpoint.style"
+import Link from "next/link"
 
 const StyleHero = styled.section`
   ${({
@@ -16,9 +16,12 @@ const StyleHero = styled.section`
   flex-direction: column;
   min-height: 100vh;
 
+  padding-bottom: 10vh;
   max-width: var(--big-max-width);
 
   @media ${device.tablet} {
+    padding: 0;
+
     /* padding-; */
     flex-direction: row-reverse;
     text-align: left;
@@ -125,7 +128,7 @@ const Hero = () => {
         </p>
 
         <div>
-          <Link href={'/projects'}> check out my projects</Link>
+          <Link href={"/projects"}> check out my projects</Link>
         </div>
       </StyledIntro>
     </StyleHero>

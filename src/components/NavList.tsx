@@ -1,42 +1,49 @@
-import { configData } from "../configUi"
 import Link from "next/link"
 import styled from "styled-components"
 import { useContext } from "react"
 import { UiContext } from "../store/isActiveContext"
 import { Icon } from "../../interface"
 import { icons } from "react-icons"
-import { useRouter } from "next/router"
+import { configData } from "../configUi"
 
 import { useState, useEffect } from "react"
 
-const NavList = () => {
-  const { navLinks, colors } = configData
-  const [active, setActive] = useState("")
+type props = {
+  path: string
+  activeColor: string
+}
 
+const NavList = ({ path, activeColor }: props) => {
+  const { navLinks, colors } = configData
   const { setManuIsActive } = useContext(UiContext)
 
   const navigateHandler = () => setManuIsActive(false)
 
-  const router = useRouter()
-  const { asPath } = router
+  const ScrollHandler = (e: React.MouseEvent) => {
+    const target = e!.currentTarget!.getAttribute("href")!.replace("/", "")
 
-  useEffect(() => {
-    setActive(colors.skyBlue)
-  }, [colors.skyBlue])
+    if (!target) return
+    console.log(target)
 
-  // console.log(router)
+    const location = document!.querySelector(target) as HTMLElement | null
+    if (location !== null)
+      window.scrollTo({
+        left: 0,
+        top: location.offsetTop - 100,
+      })
+  }
 
   return (
     <ul>
       {navLinks.map(({ name, url, Icon }) => (
         <li key={url} onClick={navigateHandler}>
-          <Link href={url}>
-            <a className="nav-link">
+          <Link href={url} passHref>
+            <a className="nav-link" onClick={ScrollHandler}>
               <Icon />
               <span
                 className={`nav-text `}
                 style={{
-                  color: `${asPath === url ? active : ""}`,
+                  color: `${path === url ? activeColor : ""}`,
                 }}
               >
                 {name}

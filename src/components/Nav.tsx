@@ -14,10 +14,13 @@ import { css } from "styled-components"
 import usePrefersReducedMotion from "../Hooks/ usePrefersReducedMotion"
 
 import { device, desktopApp } from "../styles/Breakpoint.style"
+import { useRouter } from "next/router"
 import {
   useScrollDirection,
   ScrollDirections,
 } from "../Hooks/ useScrollDirection "
+
+import { configData } from "../configUi"
 
 const Header = styled.header<scrolltDirections>`
   display: flex;
@@ -154,6 +157,11 @@ const MainNavigation = () => {
   // const [lastscrollY, setlastscrollY] = useState(0)
   const direction = useScrollDirection()
   const prefersReducedMotion = usePrefersReducedMotion()
+  const [active, setActive] = useState("")
+
+  const router = useRouter()
+  const { asPath } = router
+  const { navLinks, colors } = configData
 
   const scrollHandler = () => {
     if (typeof window !== "undefined") {
@@ -166,12 +174,13 @@ const MainNavigation = () => {
       if (prefersReducedMotion) {
         return
       }
+      setActive(colors.skyBlue)
 
       window.addEventListener("scroll", scrollHandler)
 
       return () => window.removeEventListener("scroll", scrollHandler)
     }
-  })
+  }, [colors.skyBlue, prefersReducedMotion])
   return (
     <Header toggleHeader={showHeader} direction={direction}>
       <StyledNav>
@@ -184,7 +193,7 @@ const MainNavigation = () => {
         </StyleLogo>
 
         <DeskTopNavigation>
-          <NavList />
+          <NavList path={asPath} activeColor={active} />
 
           <div>
             <a

@@ -1,11 +1,11 @@
-import { ui } from '../../interface'
-import React, { useState } from 'react'
+import { ui } from "../../interface"
+import React, { useState } from "react"
+import Router from "next/router"
 
 export const UiContext = React.createContext<ui>({
   isActive: false,
   toggleIsActive: () => {},
-  setManuIsActive:(val)=> {},
-
+  setManuIsActive: (val) => {},
 })
 
 const UiContextProvider: React.FC = (props) => {
@@ -13,15 +13,14 @@ const UiContextProvider: React.FC = (props) => {
   const toggleHamHandler = () => {
     setToggleHam((prev) => !prev)
   }
-const setManuIsActiveHandler = (val: boolean)=>{
-  setToggleHam(val)
-}
-
+  const setManuIsActiveHandler = (val: boolean) => {
+    setToggleHam(val)
+  }
 
   const contextValue: ui = {
     isActive: toggleHam,
     toggleIsActive: toggleHamHandler,
-    setManuIsActive :  setManuIsActiveHandler,
+    setManuIsActive: setManuIsActiveHandler,
   }
 
   return (
