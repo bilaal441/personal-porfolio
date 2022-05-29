@@ -3,13 +3,13 @@ import { device } from "../styles/Breakpoint.style"
 import { useRef, useContext, useEffect } from "react"
 
 import { Helmet } from "react-helmet"
-import Navlist from "./NavList"
+import NavList from "./NavList"
 
 import useOnclickOutside from "../Hooks/useOnClickOutside"
 import { UiContext } from "../store/isActiveContext"
 import link from "next/link"
 
-// import cv from '../Documents/cv.pdf'
+import { configData } from "../configUi"
 
 type active = {
   isActive: boolean
@@ -177,6 +177,7 @@ const Menu = () => {
       window.removeEventListener("resize", onResizeHandler)
     }
   })
+  const { navLinks, colors } = configData
   return (
     <MenuContainer ref={menuRef}>
       <Helmet>
@@ -191,7 +192,16 @@ const Menu = () => {
 
       <Aside isActive={isActive}>
         <nav>
-          <Navlist path={""} activeColor={""} />
+          {navLinks.map(({ name, url, Icon }) => (
+            <NavList
+              key={name}
+              name={name}
+              url={url}
+              Icon={Icon}
+              activeColor={""}
+            
+            />
+          ))}
 
           <a
             href="/resume/cv.pdf"

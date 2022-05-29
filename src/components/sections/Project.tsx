@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import { IoIosCodeWorking } from 'react-icons/io'
 import Link from 'next/link'
 import { device } from '../../styles/Breakpoint.style'
-import { ReactNode } from 'react'
+
 
 import Card from './Card'
 import { BsArrowRightShort } from 'react-icons/bs'
-import { repoData } from '../../../interface/index'
+
 const StyleProjectSection = styled.section`
   h1 {
     letter-spacing: -0.01rem;

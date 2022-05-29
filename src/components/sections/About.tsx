@@ -29,6 +29,8 @@ const StyleAboutSection = styled.section`
       gap: 3.488rem;
     }
   }
+
+
 `
 
 const StyledAboutText = styled.div`

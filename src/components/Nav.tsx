@@ -1,8 +1,6 @@
 import Link from "next/link"
-import Image from "next/image"
 
 import { StyleLogo } from "../styles/styledHeader"
-import Logo from "../../imgs/logo.png"
 
 import React, {
   useState,
@@ -19,12 +17,9 @@ import { css } from "styled-components"
 
 import usePrefersReducedMotion from "../Hooks/ usePrefersReducedMotion"
 
-import { device, desktopApp } from "../styles/Breakpoint.style"
-import { useRouter } from "next/router"
-import {
-  useScrollDirection,
-  ScrollDirections,
-} from "../Hooks/ useScrollDirection "
+import { device } from "../styles/Breakpoint.style"
+
+import { useScrollDirection } from "../Hooks/ useScrollDirection "
 
 import { configData } from "../configUi"
 
@@ -160,16 +155,12 @@ const DeskTopNavigation = styled.div`
 
 const MainNavigation = () => {
   const [showHeader, setShowHearder] = useState(true)
-  // const [lastscrollY, setlastscrollY] = useState(0)
+
   const direction = useScrollDirection()
   const prefersReducedMotion = usePrefersReducedMotion()
   const [active, setActive] = useState("")
 
-  const router = useRouter()
-  const { asPath } = router
   const { navLinks, colors } = configData
-
-  const hearderRef = useRef<HTMLHeadingElement>(null)
 
   // console.log(hearderRef)
   const scrollHandler = () => {
@@ -185,27 +176,15 @@ const MainNavigation = () => {
       }
       setActive(colors.skyBlue)
 
-      // const headerObserverCallBack = (entries: object[]) => {
-      //   const entry = entries[0]
-
-      //   console.log(entry)
-      // }
-
-      // const headerObserver = new IntersectionObserver(headerObserverCallBack, {
-      //   root: null,
-      //   threshold: 0,
-      //   rootMargin: `-${100}px`,
-      // })
-
-      // headerObserver.observe(hearderRef.current!)
-
       window.addEventListener("scroll", scrollHandler)
 
-      return () => window.removeEventListener("scroll", scrollHandler)
+      return () => {
+        window.removeEventListener("scroll", scrollHandler)
+      }
     }
   }, [colors.skyBlue, prefersReducedMotion])
   return (
-    <Header ref={hearderRef} toggleHeader={showHeader} direction={direction}>
+    <Header toggleHeader={showHeader} direction={direction}>
       <StyledNav>
         <StyleLogo>
           <Link href="/" passHref>
@@ -216,7 +195,15 @@ const MainNavigation = () => {
         </StyleLogo>
 
         <DeskTopNavigation>
-          <NavList path={asPath} activeColor={active} />
+          {navLinks.map(({ name, url, Icon }) => (
+            <NavList
+              key={name}
+              name={name}
+              url={url}
+              Icon={Icon}
+              activeColor={active}
+            />
+          ))}
 
           <div>
             <a
