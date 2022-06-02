@@ -2,6 +2,8 @@ import styled from "styled-components"
 import { device } from "../../styles/Breakpoint.style"
 import { IoIosContact } from "react-icons/io"
 
+import { useInView } from "react-intersection-observer"
+
 import {
   SiNextdotjs as NextJs,
   SiStyledcomponents as StyledComponents,
@@ -9,6 +11,7 @@ import {
   SiJavascript as JavaScript,
   SiTypescript as Typescript,
 } from "react-icons/si"
+import { useEffect, useState } from "react"
 
 const iconObject = {
   ReactJs,
@@ -29,8 +32,6 @@ const StyleAboutSection = styled.section`
       gap: 3.488rem;
     }
   }
-
-
 `
 
 const StyledAboutText = styled.div`
@@ -97,8 +98,28 @@ const AboutSection = ({ bio, skilss }: props) => {
     return <Value />
   }
 
+  const [currentWindowSize, setCurrentWindowSize] = useState(false)
+  useEffect(() => {
+    if (window.innerWidth <= 768) setCurrentWindowSize(true)
+  }, [])
+
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    rootMargin: "-100px",
+
+    threshold: 0.15,
+  })
+
   return (
-    <StyleAboutSection id="about">
+    <StyleAboutSection
+      id="about"
+      ref={ref}
+      className={`${
+        entry?.isIntersecting && inView && currentWindowSize
+          ? "transformFromTop"
+          : ""
+      }`}
+    >
       <h1 className="section-heading">
         <span className="icon-heading">
           <IoIosContact />

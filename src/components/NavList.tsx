@@ -1,9 +1,11 @@
 import Link from "next/link"
 
-import { useContext, useRef, useEffect } from "react"
+import { useContext, useRef } from "react"
 import { UiContext } from "../store/isActiveContext"
 
 import { IconType } from "react-icons"
+
+import { useRouter } from "next/router"
 
 type props = {
   activeColor: string
@@ -15,42 +17,51 @@ type props = {
 
 const NavList = ({ name, url, Icon }: props) => {
   const { setManuIsActive } = useContext(UiContext)
-  const linkRef = useRef<HTMLAnchorElement>(null)
-  const nameRef = useRef<HTMLAnchorElement>(null)
+  // const [isActive, setIactive] = useState("")
   const navigateHandler = () => setManuIsActive(false)
 
-  const scrollHandler = (e: React.MouseEvent) => {
-    e.preventDefault()
-    const spans = document!.querySelectorAll(
-      `.nav-text`,
-    ) as NodeListOf<Element> | null
+  const router = useRouter()
 
-    spans?.forEach((el) => {
-      el.classList.remove("active")
-    })
+  // const scrollHandler = (e: React.MouseEvent) => {
+  //   e.preventDefault()
+  //   const spans = document!.querySelectorAll(
+  //     `.nav-text`,
+  //   ) as NodeListOf<Element> | null
 
-    const target = e!.currentTarget!.getAttribute("href")!.replace("/", "")
+  //   spans?.forEach((el) => {
+  //     el.classList.remove("active")
+  //   })
 
-    if (!target) return
+  //   const target = e!.currentTarget!.getAttribute("href")!.replace("/", "")
 
-    const location = document!.querySelector(target) as HTMLElement | null
-    if (url === `/${target}`) nameRef.current?.classList.toggle("active")
+  //   if (!target) return
 
-    if (location !== null) {
-      window.scrollTo({
-        left: 0,
-        top: location.offsetTop - 100,
-      })
-    }
-  }
+  //   const location = document!.querySelector(target) as HTMLElement | null
+  //   if (url === `/${target}`) nameRef.current?.classList.add("active")
+
+  //   if (location !== null) {
+  //     // window.scrollTo({
+  //     //   left: 0,
+  //     //   top: location.offsetTop - 100,
+  //     //   behavior: "smooth",
+  //     // })
+
+  //     location.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //     })
+  //   }
+  // }
 
   return (
     <ul>
       <li key={url} onClick={navigateHandler}>
         <Link href={url} passHref>
-          <a className="nav-link" ref={linkRef} onClick={scrollHandler}>
+          <a className="nav-link">
             <Icon />
-            <span className={`nav-text `} ref={nameRef}>
+            <span
+              className={`nav-text ${router.asPath === url ? "active" : ""} `}
+            >
               {name}
             </span>
           </a>

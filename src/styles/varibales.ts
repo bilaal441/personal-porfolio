@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import { css } from "styled-components"
 
 const variables = css`
   :root {
@@ -11,13 +11,13 @@ const variables = css`
     --clr-white: #fff;
     --clr-light: #d1d1d6;
     --clr-navy-dark: #161628;
-    --fontStack: 'Open Sans', sans-serif;
+    --fontStack: "Open Sans", sans-serif;
     --clr-light-sky-blue: #a5e7ff;
 
     --clr-dark-text: #a4a4ad;
 
     --big-max-width: clamp(50rem, 55rem, 60rem);
-    --nav-height: 5rem;
+    --nav-height: 100px;
     --border-radiusCard: 0.5rem 0.5rem 0rem 0rem;
     --transition: all 0.25s ease-in-outl;
   }

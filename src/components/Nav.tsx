@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import { StyleLogo } from "../styles/styledHeader"
+import { useRouter } from "next/router"
 
 import React, {
   useState,
@@ -17,9 +18,12 @@ import { css } from "styled-components"
 
 import usePrefersReducedMotion from "../Hooks/ usePrefersReducedMotion"
 
-import { device } from "../styles/Breakpoint.style"
+import { device, desktopApp } from "../styles/Breakpoint.style"
 
-import { useScrollDirection } from "../Hooks/ useScrollDirection "
+import {
+  useScrollDirection,
+  ScrollDirections,
+} from "../Hooks/ useScrollDirection "
 
 import { configData } from "../configUi"
 
@@ -46,10 +50,9 @@ const Header = styled.header<scrolltDirections>`
         height: var(--nav-height);
         box-shadow: 0 0.5rem 1.5rem -0.5rem rgba(22, 22, 40, 0.85);
 
-        transition: all 0.25s ease-in-out cubic-bezier(0.25, 0.46, 0.45, 0.4);
+        transition: var(--transition) cubic-bezier(0.25, 0.46, 0.45, 0.4);
 
-
-        background-color: rgba(22, 22, 40, 0.6)
+        background-color: rgba(22, 22, 40, 0.6);
         transform: translateY(0rem);
       `}
 
@@ -58,7 +61,7 @@ const Header = styled.header<scrolltDirections>`
       direction === "down" &&
       css`
         height: var(--nav-height);
-        transition: all 0.25s ease-in-out cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: var( --transition) cubic-bezier(0.25, 0.46, 0.45, 0.94);
         box-shadow: 0 0.5rem 1.5rem -0.6rem rgba(22, 22, 40, 0.6)
        
         background-color: rgba(22, 22, 40, 0.8);
@@ -154,6 +157,7 @@ const DeskTopNavigation = styled.div`
 `
 
 const MainNavigation = () => {
+  const router = useRouter()
   const [showHeader, setShowHearder] = useState(true)
 
   const direction = useScrollDirection()
@@ -178,11 +182,28 @@ const MainNavigation = () => {
 
       window.addEventListener("scroll", scrollHandler)
 
+      // const onHashChangeStart = (url: string) => {
+      //   if (!router.asPath.includes("#")) return
+      //   const location = document!.querySelector(
+      //     router.asPath.replace("/", ""),
+      //   ) as HTMLElement | null
+
+      //   console.log(location)
+      //   if (location !== null) {
+      //     location.scrollIntoView({
+      //       behavior: "smooth",
+      //     })
+      //   }
+      // }
+
+      // router.events.on("hashChangeStart", onHashChangeStart)
+
       return () => {
         window.removeEventListener("scroll", scrollHandler)
+        // router.events.off("hashChangeStart", onHashChangeStart)
       }
     }
-  }, [colors.skyBlue, prefersReducedMotion])
+  }, [colors.skyBlue, prefersReducedMotion, router.events, router.asPath])
   return (
     <Header toggleHeader={showHeader} direction={direction}>
       <StyledNav>

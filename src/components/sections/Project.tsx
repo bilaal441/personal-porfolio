@@ -1,11 +1,12 @@
-import styled from 'styled-components'
-import { IoIosCodeWorking } from 'react-icons/io'
-import Link from 'next/link'
-import { device } from '../../styles/Breakpoint.style'
+import styled from "styled-components"
+import { IoIosCodeWorking } from "react-icons/io"
+import Link from "next/link"
+import { device } from "../../styles/Breakpoint.style"
 
-
-import Card from './Card'
-import { BsArrowRightShort } from 'react-icons/bs'
+import Card from "./Card"
+import { BsArrowRightShort } from "react-icons/bs"
+import { useInView } from "react-intersection-observer"
+import { useEffect, useState } from "react"
 
 const StyleProjectSection = styled.section`
   h1 {
@@ -91,8 +92,29 @@ type props = {
 }
 
 const Project = ({ items }: props) => {
+  const [currentWindowSize, setCurrentWindowSize] = useState(false)
+
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    rootMargin: "-100px",
+
+    threshold: 0.15,
+  })
+
+  useEffect(() => {
+    if (window.innerWidth <= 768) setCurrentWindowSize(true)
+  }, [])
+
   return (
-    <StyleProjectSection id="projects">
+    <StyleProjectSection
+      id="projects"
+      ref={ref}
+      className={`${
+        entry?.isIntersecting && inView && currentWindowSize
+          ? "transformFromTop"
+          : ""
+      }`}
+    >
       <StyledGridConatiner>
         <StyledIndtro className="intro-card">
           <div className="inner-intro-heading">

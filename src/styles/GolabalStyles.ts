@@ -140,10 +140,20 @@ section {
     
     max-width: 50rem;
     padding: 3rem 0;
+    &.transformFromTop {
+      
+   
+ padding-top: var(--nav-height);
+  }
     
 
     @media ${device.tablet} {
       padding: 4rem 0;
+
+      &.transformFromTop {
+     padding-top: 4rem;
+  }
+     
   }
 
   @media ${device.laptop} {
