@@ -40,12 +40,14 @@ const StyledContact = styled.section`
 `
 
 const Contact = () => {
-  const { ref, currentWindowSize, smallScreen } = useObserver()
+  const { ref, entry } = useObserver()
   return (
     <StyledContact
       id="contact"
       ref={ref}
-      className={`${currentWindowSize ? "transformFromTop" : "section-hidden"}`}
+      className={`${
+        entry?.isIntersecting ? "transformFromTop" : "section-hidden"
+      }`}
     >
       <div>
         <h2 className="section-heading">

@@ -92,12 +92,14 @@ type props = {
 }
 
 const Project = ({ items }: props) => {
-  const { ref, currentWindowSize } = useObserver()
+  const { ref, entry } = useObserver()
   return (
     <StyleProjectSection
       id="projects"
       ref={ref}
-      className={`${currentWindowSize ? "transformFromTop" : "section-hidden"}`}
+      className={`${
+        entry?.isIntersecting ? "transformFromTop" : "section-hidden"
+      }`}
     >
       <StyledGridConatiner>
         <StyledIndtro className="intro-card">

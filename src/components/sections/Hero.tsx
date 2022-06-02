@@ -104,12 +104,12 @@ const StyledIntro = styled.div`
 `
 
 const Hero = () => {
-  const { ref, currentWindowSize } = useObserver()
+  const { ref, entry } = useObserver()
   return (
     <StyleHero
       ref={ref}
       className={`${
-        currentWindowSize ? "transformFromTop" : " section-hidden"
+        entry?.isIntersecting ? "transformFromTop" : " section-hidden"
       }`}
     >
       <StyleImageContainer>

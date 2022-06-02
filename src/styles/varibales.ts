@@ -19,7 +19,7 @@ const variables = css`
     --big-max-width: clamp(50rem, 55rem, 60rem);
     --nav-height: 100px;
     --border-radiusCard: 0.5rem 0.5rem 0rem 0rem;
-    --transition: all 0.25s ease-in-outl;
+    --transition: all 0.3s ease-in-outl;
   }
 `
 

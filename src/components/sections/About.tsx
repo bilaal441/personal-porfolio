@@ -96,13 +96,15 @@ const AboutSection = ({ bio, skilss }: props) => {
     return <Value />
   }
 
-  const { ref, currentWindowSize, smallScreen } = useObserver()
+  const { ref, entry } = useObserver()
 
   return (
     <StyleAboutSection
       id="about"
       ref={ref}
-      className={`${currentWindowSize ? "transformFromTop" : "section-hidden"}`}
+      className={`${
+        entry?.isIntersecting ? "transformFromTop" : "section-hidden"
+      }`}
     >
       <h1 className="section-heading">
         <span className="icon-heading">
