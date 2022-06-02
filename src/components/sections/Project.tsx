@@ -6,7 +6,7 @@ import { device } from "../../styles/Breakpoint.style"
 import Card from "./Card"
 import { BsArrowRightShort } from "react-icons/bs"
 import { useInView } from "react-intersection-observer"
-import { useEffect, useState } from "react"
+import useObserver from "../../Hooks/useObserver"
 
 const StyleProjectSection = styled.section`
   h1 {
@@ -92,28 +92,12 @@ type props = {
 }
 
 const Project = ({ items }: props) => {
-  const [currentWindowSize, setCurrentWindowSize] = useState(false)
-
-  const { ref, inView, entry } = useInView({
-    /* Optional options */
-    rootMargin: "-100px",
-
-    threshold: 0.15,
-  })
-
-  useEffect(() => {
-    if (window.innerWidth <= 768) setCurrentWindowSize(true)
-  }, [])
-
+  const { ref, currentWindowSize } = useObserver()
   return (
     <StyleProjectSection
       id="projects"
       ref={ref}
-      className={`${
-        entry?.isIntersecting && inView && currentWindowSize
-          ? "transformFromTop"
-          : ""
-      }`}
+      className={`${currentWindowSize ? "transformFromTop" : "section-hidden"}`}
     >
       <StyledGridConatiner>
         <StyledIndtro className="intro-card">

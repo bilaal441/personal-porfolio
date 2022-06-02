@@ -2,6 +2,7 @@ import { CgVoicemailO } from "react-icons/cg"
 import styled from "styled-components"
 import { device } from "../../styles/Breakpoint.style"
 import { configData } from "../../configUi"
+import useObserver from "../../Hooks/useObserver"
 
 import Link from "next/link"
 
@@ -39,8 +40,13 @@ const StyledContact = styled.section`
 `
 
 const Contact = () => {
+  const { ref, currentWindowSize, smallScreen } = useObserver()
   return (
-    <StyledContact id="contact">
+    <StyledContact
+      id="contact"
+      ref={ref}
+      className={`${currentWindowSize ? "transformFromTop" : "section-hidden"}`}
+    >
       <div>
         <h2 className="section-heading">
           <CgVoicemailO className="icon-heading" />

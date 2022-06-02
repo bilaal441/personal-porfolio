@@ -5,6 +5,7 @@ import HeroImage from "../../icons/me.svg"
 
 import { device } from "../../styles/Breakpoint.style"
 import Link from "next/link"
+import useObserver from "../../Hooks/useObserver"
 
 const StyleHero = styled.section`
   ${({
@@ -103,8 +104,14 @@ const StyledIntro = styled.div`
 `
 
 const Hero = () => {
+  const { ref, currentWindowSize } = useObserver()
   return (
-    <StyleHero>
+    <StyleHero
+      ref={ref}
+      className={`${
+        currentWindowSize ? "transformFromTop" : " section-hidden"
+      }`}
+    >
       <StyleImageContainer>
         <div className="image-container">
           <Image

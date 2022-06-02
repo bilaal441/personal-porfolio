@@ -135,24 +135,29 @@ img{
   width: 100%;
 }
 
+.transformFromTop {
+     transform: translateY(0rem);
+      transition:  var(--transition);
+      opacity: 1;
+    }
+
+    .section-hidden{
+      transform: translateY(calc(var(--nav-height) * -1));
+      opacity: 0;
+    }
+
 section {
     margin: 0 auto;
     
     max-width: 50rem;
     padding: 3rem 0;
-    &.transformFromTop {
-      
-   
- padding-top: var(--nav-height);
-  }
+    
     
 
     @media ${device.tablet} {
       padding: 4rem 0;
 
-      &.transformFromTop {
-     padding-top: 4rem;
-  }
+     
      
   }
 
