@@ -1,15 +1,23 @@
 import styled from "styled-components"
 import { device } from "../styles/Breakpoint.style"
-import { useRef, useContext, useEffect } from "react"
+import React, {
+  useRef,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react"
 
 import { Helmet } from "react-helmet"
 import NavList from "./NavList"
 
 import useOnclickOutside from "../Hooks/useOnClickOutside"
 import { UiContext } from "../store/isActiveContext"
-import link from "next/link"
 
 import { configData } from "../configUi"
+import { TransitionGroup, CSSTransition } from "react-transition-group"
+
+import usePrefersReducedMotion from "../Hooks/ usePrefersReducedMotion"
 
 type active = {
   isActive: boolean
@@ -70,7 +78,7 @@ const Hamburger = styled.button<active>`
   }
 `
 
-const Aside = styled.aside<{ isActive: boolean }>`
+const Aside = styled.aside`
   ${({
     theme: {
       mixin: { flexCenter },
@@ -86,10 +94,6 @@ const Aside = styled.aside<{ isActive: boolean }>`
   transition: all 0.5s ease-in-out;
   background-color: var(--clr-navy-dark);
   height: 100vh;
-  visibility: ${({ isActive }) => (isActive ? "visible" : "hidden")};
-
-  transform: ${({ isActive }) =>
-    isActive ? "translateX(0)" : "translateX(100vh)"};
 
   nav {
     ${({
@@ -163,21 +167,33 @@ const Menu = () => {
   const menuRef = useRef<HTMLDivElement>(null)
   useOnclickOutside(menuRef, () => setManuIsActive(false))
 
-  const onResizeHandler = (e: Event) => {
-    const target = e.target as Window
+  const [isparentMounted, setIsparentMounted] = useState(false)
 
-    if (target.innerWidth > 768) {
-      setManuIsActive(false)
-    }
-  }
+  const onResizeHandler = useCallback(
+    (e: Event) => {
+      const target = e.target as Window
 
+      if (target.innerWidth > 768) {
+        setManuIsActive(false)
+      }
+    },
+
+    [setManuIsActive],
+  )
+  const prefersReducedMotion = usePrefersReducedMotion()
   useEffect(() => {
     window.addEventListener("resize", onResizeHandler)
+
+    if (isActive) setIsparentMounted(true)
     return () => {
       window.removeEventListener("resize", onResizeHandler)
+      setIsparentMounted(false)
     }
-  })
-  const { navLinks, colors } = configData
+  }, [onResizeHandler, isActive])
+  const { navLinks } = configData
+
+  const fadeDown = isparentMounted ? "fadedown" : ""
+  const timeout = isparentMounted ? 300 : 0
   return (
     <MenuContainer ref={menuRef}>
       <Helmet>
@@ -190,31 +206,83 @@ const Menu = () => {
         <span></span>
       </Hamburger>
 
-      <Aside isActive={isActive}>
-        <nav>
-          {navLinks.map(({ name, url, Icon }) => (
-            <NavList
-              key={name}
-              name={name}
-              url={url}
-              Icon={Icon}
-              activeColor={""}
-            
-            />
-          ))}
-
-          <a
-            href="/resume/cv.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="resume-link"
-          >
-            resume
-          </a>
-        </nav>
-      </Aside>
+      <CSSTransition
+        timeout={timeout}
+        classNames="aside"
+        key={"is"}
+        mountOnEnter
+        unmountOnExit
+        in={isActive}
+      >
+        <>
+          <Aside>
+            <nav>
+              <ul>
+                {prefersReducedMotion
+                  ? navLinks.map(({ name, url, Icon }, i) => (
+                      <NavList
+                        key={i}
+                        name={name}
+                        url={url}
+                        Icon={Icon}
+                        styleCss={{}}
+                      />
+                    ))
+                  : navLinks.map(({ name, url, Icon }, i) => (
+                      <CSSTransition
+                        classNames={fadeDown}
+                        timeout={timeout}
+                        key={i}
+                        in={isparentMounted}
+                        mountOnEnter
+                      >
+                        <NavList
+                          key={i}
+                          name={name}
+                          url={url}
+                          Icon={Icon}
+                          styleCss={{
+                            transitionDelay: `${i + 1}00ms`,
+                          }}
+                        />
+                      </CSSTransition>
+                    ))}
+              </ul>
+              {prefersReducedMotion ? (
+                <a
+                  href="/resume/cv.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="resume-link"
+                >
+                  resume
+                </a>
+              ) : (
+                <CSSTransition
+                  classNames={fadeDown}
+                  timeout={timeout}
+                  in={isparentMounted}
+                  mountOnEnter
+                >
+                  <a
+                    href="/resume/cv.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="resume-link"
+                    style={{
+                      transitionDelay: `${navLinks.length + 1}00ms`,
+                    }}
+                  >
+                    resume
+                  </a>
+                </CSSTransition>
+              )}
+            </nav>
+          </Aside>
+        </>
+      </CSSTransition>
     </MenuContainer>
   )
 }
 
-export default Menu
+export default React.memo(Menu)

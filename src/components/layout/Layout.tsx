@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useState, useEffect, Fragment } from "react"
 import MainNavigation from "../Nav"
 import { GlobalStyle, theme } from "../../styles/index"
 import Footer from "../sections/Footer"
@@ -8,6 +8,10 @@ import styled, {
 } from "styled-components"
 import { device } from "../../styles/Breakpoint.style"
 import mixin from "../../styles/mixin"
+import { useRouter } from "next/router"
+import Loader from "../Loader"
+import { AnimatePresence } from "framer-motion"
+
 type Props = {
   children: ReactNode
 }
@@ -49,19 +53,61 @@ const StyleLayout = styled.div`
 `
 
 const Layout = ({ children }: Props) => {
+  const router = useRouter()
+  const { asPath, replace, events } = router
+  const home = asPath === "/" || asPath.includes("#")
+  const [isHome, setIshome] = useState(home)
+
+  const [isLoading, setIsLoading] = useState(isHome)
+
+  useEffect(() => {
+    if (isLoading) return
+
+    if (asPath.includes("#") && !isLoading) {
+      const section = document.getElementById(asPath.replaceAll("/#", ""))
+
+      setTimeout(() => {
+        if (section) {
+          section?.scrollIntoView()
+
+          section?.focus()
+        }
+      }, 0)
+    }
+    const handller = (url: string) => {
+      if (url === "/" && !isLoading) setIsLoading(true)
+    }
+    router.events.on("hashChangeComplete", handller)
+
+    return () => router.events.off("hashChangeComplete", handller)
+  }, [router, asPath, isLoading])
+
   return (
-    <ThemeProvider theme={theme}>
-      <StyleLayout>
+    <div id="root">
+      <ThemeProvider theme={theme}>
         <GlobalStyle />
+        <AnimatePresence>
+          {isLoading && (
+            <Loader
+              finishLoading={() => {
+                setIsLoading(false)
+              }}
+              isLoading={isLoading}
+            />
+          )}
+        </AnimatePresence>
+        {!isLoading && (
+          <StyleLayout>
+            <MainNavigation />
 
-        <MainNavigation />
-
-        <div id="content">
-          <StayledMain className="fillHeight">{children}</StayledMain>
-          <Footer />
-        </div>
-      </StyleLayout>
-    </ThemeProvider>
+            <div id="content">
+              <StayledMain className="fillHeight">{children}</StayledMain>
+              <Footer />
+            </div>
+          </StyleLayout>
+        )}
+      </ThemeProvider>
+    </div>
   )
 }
 

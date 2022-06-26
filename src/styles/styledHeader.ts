@@ -5,24 +5,17 @@ import styled, { StyledFunction } from "styled-components"
 export const StyleLogo = styled.div`
   ${({
     theme: {
-      mixin: { flexBetween },
+      mixin: { flexCenter },
     },
-  }) => flexBetween}
+  }) => flexCenter}
+
   a {
-    display: inline-block;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    text-align: center;
-    color: var(--clr-purple-light);
-    font-weight: bold;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
-  div {
-    font-weight: bold;
-    font-size: inherit;
-    text-transform: capitalize;
-    &::first-letter {
-      color: var(--clr-sky-blue);
-    }
+  svg {
+    width: 100%;
+    height: 100%;
   }
 `

@@ -1,15 +1,8 @@
 import Link from "next/link"
 
 import { StyleLogo } from "../styles/styledHeader"
-import { useRouter } from "next/router"
 
-import React, {
-  useState,
-  ReactNode,
-  useEffect,
-  useCallback,
-  useRef,
-} from "react"
+import React, { useState, useEffect, useContext } from "react"
 import NavList from "./NavList"
 import Menu from "./Menu"
 import styled from "styled-components"
@@ -18,15 +11,15 @@ import { css } from "styled-components"
 
 import usePrefersReducedMotion from "../Hooks/ usePrefersReducedMotion"
 
-import { device, desktopApp } from "../styles/Breakpoint.style"
+import { device } from "../styles/Breakpoint.style"
 
-import {
-  useScrollDirection,
-  ScrollDirections,
-} from "../Hooks/ useScrollDirection "
+import { useScrollDirection } from "../Hooks/ useScrollDirection "
 
 import { configData } from "../configUi"
+import Logo from "../icons/logo"
+import { useRouter } from "next/router"
 
+import { TransitionGroup, CSSTransition } from "react-transition-group"
 const Header = styled.header<scrolltDirections>`
   display: flex;
   justify-content: space-between;
@@ -157,16 +150,15 @@ const DeskTopNavigation = styled.div`
 `
 
 const MainNavigation = () => {
-  const router = useRouter()
   const [showHeader, setShowHearder] = useState(true)
+  const router = useRouter()
+  const [isMounted, setIsMounted] = useState(router.asPath !== "/")
 
   const direction = useScrollDirection()
   const prefersReducedMotion = usePrefersReducedMotion()
-  const [active, setActive] = useState("")
 
-  const { navLinks, colors } = configData
+  const { navLinks, loarderDelay, navDelay } = configData
 
-  // console.log(hearderRef)
   const scrollHandler = () => {
     if (typeof window !== "undefined") {
       setShowHearder(window.pageYOffset < 50)
@@ -178,67 +170,128 @@ const MainNavigation = () => {
       if (prefersReducedMotion) {
         return
       }
-      setActive(colors.skyBlue)
 
       window.addEventListener("scroll", scrollHandler)
 
-      // const onHashChangeStart = (url: string) => {
-      //   if (!router.asPath.includes("#")) return
-      //   const location = document!.querySelector(
-      //     router.asPath.replace("/", ""),
-      //   ) as HTMLElement | null
-
-      //   console.log(location)
-      //   if (location !== null) {
-      //     location.scrollIntoView({
-      //       behavior: "smooth",
-      //     })
-      //   }
-      // }
-
-      // router.events.on("hashChangeStart", onHashChangeStart)
+      const timeout = setTimeout(() => {
+        setIsMounted(true)
+      }, 100)
 
       return () => {
         window.removeEventListener("scroll", scrollHandler)
-        // router.events.off("hashChangeStart", onHashChangeStart)
+        clearTimeout(timeout)
       }
     }
-  }, [colors.skyBlue, prefersReducedMotion, router.events, router.asPath])
+  }, [prefersReducedMotion])
+  const timeout = isMounted ? loarderDelay : 0
+  
+  const fade = isMounted ? "fade" : ""
+
+  const fadeDown = isMounted ? "fadedown" : ""
+  const LogoJsx = (
+    <StyleLogo>
+      <Link href="/" passHref>
+        <a>
+          <Logo />
+        </a>
+      </Link>
+    </StyleLogo>
+  )
+  const RusumeLink = (
+    <a
+      href="/resume/cv.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="resume-link"
+    >
+      resume
+    </a>
+  )
+
   return (
     <Header toggleHeader={showHeader} direction={direction}>
       <StyledNav>
-        <StyleLogo>
-          <Link href="/" passHref>
-            <a>
-              <div>Bilal</div>
-            </a>
-          </Link>
-        </StyleLogo>
+        {prefersReducedMotion ? (
+          <>
+            {LogoJsx}
 
-        <DeskTopNavigation>
-          {navLinks.map(({ name, url, Icon }) => (
-            <NavList
-              key={name}
-              name={name}
-              url={url}
-              Icon={Icon}
-              activeColor={active}
-            />
-          ))}
+            <DeskTopNavigation>
+              <ul>
+                {navLinks.map(({ name, url, Icon }) => (
+                  <NavList
+                    key={name}
+                    name={name}
+                    url={url}
+                    Icon={Icon}
+                    styleCss={{}}
+                  />
+                ))}
+              </ul>
+              <div>{RusumeLink}</div>
+            </DeskTopNavigation>
 
-          <div>
-            <a
-              href="/resume/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="resume-link"
-            >
-              resume
-            </a>
-          </div>
-        </DeskTopNavigation>
+            <Menu />
+          </>
+        ) : (
+          <>
+            <TransitionGroup component={null}>
+              {isMounted && (
+                <CSSTransition classNames={fade} timeout={timeout}>
+                  {LogoJsx}
+                </CSSTransition>
+              )}
+            </TransitionGroup>
 
-        <Menu />
+            <DeskTopNavigation>
+              <ul>
+                <TransitionGroup component={null}>
+                  {isMounted &&
+                    navLinks &&
+                    navLinks.map(({ name, url, Icon }, i) => (
+                      <CSSTransition
+                        key={i}
+                        classNames={fadeDown}
+                        timeout={timeout}
+                      >
+                        <NavList
+                          key={name}
+                          name={name}
+                          url={url}
+                          Icon={Icon}
+                          styleCss={{
+                            transitionDelay: `${isMounted ? i * 100 : 0}ms`,
+                          }}
+                        />
+                      </CSSTransition>
+                    ))}
+                </TransitionGroup>
+              </ul>
+              <TransitionGroup component={null}>
+                {isMounted && (
+                  <CSSTransition classNames={fadeDown} timeout={timeout}>
+                    <div
+                      style={{
+                        transitionDelay: `${
+                          isMounted ? navLinks.length * 100 : 0
+                        }ms`,
+                      }}
+                    >
+                      {RusumeLink}
+                    </div>
+                  </CSSTransition>
+                )}
+              </TransitionGroup>
+            </DeskTopNavigation>
+
+            <TransitionGroup component={null}>
+              {isMounted && (
+                <CSSTransition classNames={fadeDown} timeout={timeout}>
+                  <Menu />
+                </CSSTransition>
+              )}
+            </TransitionGroup>
+          </>
+        )}
       </StyledNav>
     </Header>
   )

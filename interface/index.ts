@@ -1,4 +1,4 @@
-import { IconType } from 'react-icons'
+import { IconType } from "react-icons"
 
 export type ui = {
   isActive: boolean
@@ -36,4 +36,8 @@ export type repoData = {
   repositoryTopics: {
     nodes: Object[]
   }
+}
+
+export type mounted = {
+  isMounted: boolean
 }

@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { device } from "../../styles/Breakpoint.style"
 import { IoIosContact } from "react-icons/io"
 import useObserver from "../../Hooks/useObserver"
-
+import { CSSTransition, TransitionGroup } from "react-transition-group"
 import {
   SiNextdotjs as NextJs,
   SiStyledcomponents as StyledComponents,
@@ -10,6 +10,7 @@ import {
   SiJavascript as JavaScript,
   SiTypescript as Typescript,
 } from "react-icons/si"
+import { useEffect, useState } from "react"
 
 const iconObject = {
   ReactJs,
@@ -96,15 +97,13 @@ const AboutSection = ({ bio, skilss }: props) => {
     return <Value />
   }
 
-  const { ref, entry } = useObserver()
+  const { ref, entry, inView } = useObserver()
 
   return (
     <StyleAboutSection
       id="about"
       ref={ref}
-      className={`${
-        entry?.isIntersecting ? "transformFromTop" : "section-hidden"
-      }`}
+      className={` ${entry?.isIntersecting && "section-active"}`}
     >
       <h1 className="section-heading">
         <span className="icon-heading">
@@ -125,7 +124,7 @@ const AboutSection = ({ bio, skilss }: props) => {
         </StyledAboutText>
 
         <StyledStack>
-          <h3 className="subsection-heading"> technologies I’ve work with.</h3>
+          <h3 className="subsection-heading">technologies I’ve work with.</h3>
           <div className="charts-container">
             {skilss ? (
               skilss.map((skill: { name?: any; progress?: string }, index) => {
@@ -142,7 +141,10 @@ const AboutSection = ({ bio, skilss }: props) => {
                     </span>
                     <footer>
                       <div
-                        style={{ height: "100%", width: `${skill.progress}` }}
+                        style={{
+                          height: "100%",
+                          width: `${skill.progress}`,
+                        }}
                         className="js fill-color"
                       ></div>
                     </footer>

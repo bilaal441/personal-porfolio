@@ -23,16 +23,16 @@ const home: NextPage<props> = ({ feature, about }: props) => {
     <Fragment>
       <Head>
         <title>Bilal - front-end developer</title>
-        <meta name="title" content="Bilal - front-end developer" />
-        <meta name="keywords" content="bilal , Bilal website" />
+        <meta name="title" content="Bilal sharif  - front-end developer" />
+        <meta name="keywords" content="bilal sharif , Bilal sharif website" />
         <meta
           name="description"
           content="front end devoloper have passion for creating dynimic page, lives london  uk  "
         />
 
         <meta property="og:type" content="website" />
-        {/* <meta property="og:url" content="https://abdulrahman.id" /> */}
-        <meta property="og:title" content="Bilal - front-end developer" />
+        <meta property="og:url" content="https://bilalsharif.co.uk" />
+        <meta property="og:title" content="Bilal sharif - front-end developer" />
         <meta
           property="og:description"
           content="front end devoloper have passion for creating dynimic page, lives london  uk"

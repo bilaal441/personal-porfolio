@@ -41,13 +41,12 @@ const StyledContact = styled.section`
 
 const Contact = () => {
   const { ref, entry } = useObserver()
+
   return (
     <StyledContact
       id="contact"
       ref={ref}
-      className={`${
-        entry?.isIntersecting ? "transformFromTop" : "section-hidden"
-      }`}
+      className={` ${entry?.isIntersecting ? "section-active" : ""}`}
     >
       <div>
         <h2 className="section-heading">

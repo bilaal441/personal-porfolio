@@ -8,14 +8,13 @@ import { IconType } from "react-icons"
 import { useRouter } from "next/router"
 
 type props = {
-  activeColor: string
-
   url: string
   name: string
   Icon: IconType
+  styleCss: {}
 }
 
-const NavList = ({ name, url, Icon }: props) => {
+const NavList = ({ name, url, Icon, styleCss }: props) => {
   const { setManuIsActive } = useContext(UiContext)
 
   const navigateHandler = () => setManuIsActive(false)
@@ -23,20 +22,18 @@ const NavList = ({ name, url, Icon }: props) => {
   const router = useRouter()
 
   return (
-    <ul>
-      <li key={url} onClick={navigateHandler}>
-        <Link href={url} passHref>
-          <a className="nav-link">
-            <Icon />
-            <span
-              className={`nav-text ${router.asPath === url ? "active" : ""} `}
-            >
-              {name}
-            </span>
-          </a>
-        </Link>
-      </li>
-    </ul>
+    <li key={url} onClick={navigateHandler} style={{ ...styleCss }}>
+      <Link href={url} passHref>
+        <a className="nav-link">
+          <Icon />
+          <span
+            className={`nav-text ${router.asPath === url ? "active" : ""} `}
+          >
+            {name}
+          </span>
+        </a>
+      </Link>
+    </li>
   )
 }
 

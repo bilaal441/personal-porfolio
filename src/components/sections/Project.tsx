@@ -97,9 +97,7 @@ const Project = ({ items }: props) => {
     <StyleProjectSection
       id="projects"
       ref={ref}
-      className={`${
-        entry?.isIntersecting ? "transformFromTop" : "section-hidden"
-      }`}
+      className={` ${entry?.isIntersecting ? "section-active" : ""}`}
     >
       <StyledGridConatiner>
         <StyledIndtro className="intro-card">

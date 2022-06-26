@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components"
 import variables from "./varibales"
 import { device } from "./Breakpoint.style"
+import TransitionStyles from "./transition"
 
 // 2.488rem/49.77px	A Visual Type Scale
 // 2.074rem/41.47px	A Visual Type Scale
@@ -111,8 +112,9 @@ ${variables}
 
       min-height: 100%;
 
-      /* overflow-x: hidden; */
-
+      &.hidden {
+      overflow: hidden;
+    }
 
 
       &.blur {
@@ -135,24 +137,19 @@ img{
   width: 100%;
 }
 
-.transformFromTop {
-     transform: translateY(0rem);
-      transition:  var(--transition);
-      opacity: 1;
-    }
 
-    .section-hidden{
-      transform: translateY(calc(var(--nav-height) * -1));
-      opacity: 0;
-    }
 
 section {
-    margin: 0 auto;
+    margin: 0rem auto;
     
     max-width: 50rem;
     padding: 3rem 0;
     
-    
+   
+    transform: translateY(calc(var(--nav-height) * -1));
+
+    transition: var(--transition);
+    opacity: 0;
 
     @media ${device.tablet} {
       padding: 4rem 0;
@@ -163,9 +160,15 @@ section {
 
   @media ${device.laptop} {
    padding: 5rem 0;
-
-  }
   
+  }
+
+  
+  }
+  .section-active {
+    transition: var(--transition);
+    transform: translateX(0);
+    opacity: 1;
   }
 
 p{
@@ -235,7 +238,7 @@ align-self: center;
 }
 
 
-
+${TransitionStyles}
 
 `
 

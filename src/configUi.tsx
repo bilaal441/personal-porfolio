@@ -60,4 +60,7 @@ export const configData = {
     skyBlue: "#7FDEFF",
     white: "#fff",
   },
+
+  loarderDelay: 2000,
+  navDelay: 1000,
 }
