@@ -32,23 +32,20 @@ const home: NextPage<props> = ({ feature, about }: props) => {
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://bilalsharif.co.uk" />
-        <meta property="og:title" content="Bilal sharif - front-end developer" />
+        <meta
+          property="og:title"
+          content="Bilal sharif - front-end developer"
+        />
         <meta
           property="og:description"
           content="front end devoloper have passion for creating dynimic page, lives london  uk"
         />
-        <meta property="og:image" content="https://i.imgur.com/AOMvmeJ.png" />
 
-        <meta property="twitter:card" content="summary_large_image" />
-        {/* <meta property="twitter:url" content="https://abdulrahman.id/" /> */}
+        <meta property="twitter:url" content="https://bilalsharif.co.uk" />
         <meta property="twitter:title" content="Bilal - front-end developer" />
         <meta
           property="twitter:description"
           content="front end devoloper have passion for creating dynimic page, lives london  uk"
-        />
-        <meta
-          property="twitter:image"
-          // content="https://i.imgur.com/AOMvmeJ.png"
         />
       </Head>
 
