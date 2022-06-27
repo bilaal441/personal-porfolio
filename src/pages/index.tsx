@@ -40,12 +40,18 @@ const home: NextPage<props> = ({ feature, about }: props) => {
           property="og:description"
           content="front end devoloper have passion for creating dynimic page, lives london  uk"
         />
+        <meta property="og:image" content="https://i.imgur.com/1KvLNk8.png" />
 
+        <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://bilalsharif.co.uk" />
         <meta property="twitter:title" content="Bilal - front-end developer" />
         <meta
           property="twitter:description"
           content="front end devoloper have passion for creating dynimic page, lives london  uk"
+        />
+        <meta
+          property="twitter:image"
+          content="https://i.imgur.com/1KvLNk8.png"
         />
       </Head>
 
